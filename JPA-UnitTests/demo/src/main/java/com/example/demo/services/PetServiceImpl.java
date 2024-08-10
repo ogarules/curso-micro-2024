@@ -1,9 +1,12 @@
 package com.example.demo.services;
 
 import java.util.List;
+
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.demo.models.Pet;
 import com.example.demo.repositories.PetRepository;
+import com.querydsl.core.types.Predicate;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,8 +22,8 @@ public class PetServiceImpl implements PetService {
     }
 
     @Override
-    public Iterable<Pet> getAllPets() {
-        return repository.findAll();
+    public Iterable<Pet> getAllPets(Predicate predicate, Pageable pageable) {
+        return repository.findAll(predicate, pageable);
     }
 
     @Override

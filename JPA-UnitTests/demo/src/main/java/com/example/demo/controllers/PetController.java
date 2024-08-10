@@ -52,7 +52,7 @@ public class PetController {
                                     @PageableDefault(size = 5, page = 0)
                                     Pageable pageable) {
         log.info("Getting all pets");
-        return service.getAllPets();
+        return service.getAllPets(predicate, pageable);
     }
     
     @DeleteMapping("/{id}")
