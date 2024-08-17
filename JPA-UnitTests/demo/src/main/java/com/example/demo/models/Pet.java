@@ -14,16 +14,22 @@ import javax.validation.constraints.Pattern;
 import com.example.demo.validations.OnAdd;
 import com.example.demo.validations.OnUpdate;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "Pet")
 public class Pet {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Null(groups = OnAdd.class)
+    @Null(groups = {OnAdd.class})
     @NotNull(groups = OnUpdate.class)
     private Long id;
 
