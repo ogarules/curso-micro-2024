@@ -4,4 +4,4 @@ Feature: Testing greetings RESTFull API
   Scenario: Saludar a un usuario por nombre
     Given Tenemos un usuario con id '1'
     When el usuario desea ser saludado
-    Then el salud solicitado 'Hello Test' es retornado
+    Then el salud solicitado 'HElloo Test' es retornado
