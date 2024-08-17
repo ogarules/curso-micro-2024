@@ -28,7 +28,8 @@ public class PetServiceImpl implements PetService {
 
     @Override
     public Pet addPet(Pet pet) {
-        return repository.save(pet);
+        Pet petAdded = repository.save(pet);
+        return petAdded;
     }
 
     @Override
