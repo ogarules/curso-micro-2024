@@ -1,5 +1,15 @@
 package com.example.demo;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,21 +24,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.example.demo.controllers.PetController;
 import com.example.demo.models.Pet;
 import com.example.demo.repositories.PetRepository;
+import com.example.demo.services.PetService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.mockito.BDDMockito.given;
-import static org.mockito.ArgumentMatchers.any;
 
 @Slf4j
 @RunWith(SpringRunner.class)
@@ -46,10 +46,39 @@ public class MockTests {
     PetController controller;
 
     @Autowired
+    PetService service;
+
+    @Autowired
     MockMvc mvc;
 
     @Autowired
     ObjectMapper objectMapper;
+
+    @Test
+    public void serviceAddPet(){
+        log.info("Sdding pet...");
+        
+        Pet petresponse = Pet.builder()
+        .id(10L)
+		.age(2)
+		.name("memo")
+		.species("Perrito")
+		.tag("123.4321")
+		.build();
+        
+        given(repository.save(any())).willReturn(petresponse);
+
+        Pet pet = Pet.builder()
+		.age(2)
+		.name("memo")
+		.species("Perrito")
+		.tag("123.4321")
+		.build();
+
+        Pet petDB = service.addPet(pet);
+
+        assertEquals(petDB.getId(), 10L);
+    }
 
     @SneakyThrows
     @Test
