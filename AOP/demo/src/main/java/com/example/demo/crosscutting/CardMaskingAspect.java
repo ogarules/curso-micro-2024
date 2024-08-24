@@ -37,4 +37,24 @@ public class CardMaskingAspect {
 
         return cardItems;
     }
+
+    @Around("execution(com.example.demo.models.Card com.example.demo.controllers.*.*(..))")
+    public Object maskCard(ProceedingJoinPoint pjp) throws Throwable{
+        log.info("Masking cards...");
+
+        Object result = pjp.proceed();
+
+        Card card = (Card)result;
+
+        if(Objects.isNull(card)){
+            return null;
+        }
+
+        String numCard = card.getCardNumber();
+        card.setCardNumber("XXXX-XXXX-XXXX-" + numCard.substring(numCard.length() -4));
+
+        log.info("Maskingcard {} to {}", numCard, card.getCardNumber());        
+
+        return card;
+    }
 }
