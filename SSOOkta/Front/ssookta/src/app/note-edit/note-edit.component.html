@@ -1,0 +1,19 @@
+<p>Nota</p>
+
+<form *ngIf="note" #editForm="ngForm" (ngSubmit)="save()">
+    <label>ID</label> {{note.id || 'n/a'}}
+
+    <div>
+        Titulo: <input id="title" [(ngModel)]="note.title" name="title">
+    </div>
+
+    <div>
+        Texto: <input id="texto" [(ngModel)]="note.text" name="texto">
+    </div>
+
+    <div>
+        <button type="submit">Guardar</button>
+        <button type="button" (click)="cancel()">Cancelar</button>
+    </div>
+
+</form>

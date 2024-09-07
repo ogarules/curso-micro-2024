@@ -1,0 +1,30 @@
+<p>Notas</p>
+
+<div>
+    <button (click)="search()">Buscar</button>
+    <a [routerLink]="['../notes', 'new']">Nueva nota</a>
+</div>
+
+<div>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Texto</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of noteList">
+                <td>{{item.id}}</td>
+                <td>{{item.title}}</td>
+                <td>{{item.text}}</td>
+                <td>
+                    <a [routerLink]="['../notes', item.id]">Editar</a>
+                    <button (click)="delete(item)">Eliminar</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
