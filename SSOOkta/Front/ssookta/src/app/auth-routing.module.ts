@@ -8,9 +8,10 @@ import { OKTA_CONFIG, OktaAuthGuard, OktaAuthModule, OktaCallbackComponent } fro
 import { CommonModule } from '@angular/common';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http'
 import { AuthInterceptor } from './auth.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const oktaConfig = {
-    issuer: 'https://dev-909112-admin.okta.com/oauth2/default',
+    issuer: 'https://dev-909112.okta.com/oauth2/default',
     redirectUri: window.location.origin+'/callback',
     clientId: '0oatfnww9ehf5eu73357',
     scopes: ['openid', 'profile']
@@ -36,6 +37,8 @@ const routes: Routes =[
         CommonModule,
         HttpClientModule,
         OktaAuthModule,
+        FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(routes)
     ],
     providers: [
