@@ -2,6 +2,7 @@ package com.example.demo.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.models.Department;
 import com.example.demo.models.Organization;
 import com.example.demo.repositories.OrganizationRepository;
 import com.example.demo.services.DepartmentService;
@@ -9,6 +10,9 @@ import com.example.demo.services.EmployeeService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -64,6 +68,19 @@ public class OrganizationController {
     @GetMapping("/{id}/employees")
     public Organization getOrganizationWithEmployees(@PathVariable String id) {
         log.info("k8s get organization with employees {}", id);
+
+        // List<Department> organizationDepartments = repository.findById(id)
+        //                 .map(o -> o.getDepartments())
+        //                 .orElse(null);
+
+        // List<Department> organizationDepartments2 = repository.findById(id)
+        //                 .map(Organization::getDepartments)
+        //                 .orElse(null);
+        
+        // int departmentsCount = repository.findById(id)
+        //                 .map(Organization::getDepartments)
+        //                 .map(List::size)
+        //                 .orElse(0);
 
         return repository.findById(id)
                          .map(o -> {

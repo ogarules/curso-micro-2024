@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee
+spec:
+  selector:
+    matchLabels:
+      app: employee
+  template:
+    metadata:
+      labels:
+        app: employee
+    spec:
+      containers:
+      - name: employee
+        image: containersoga/employee:100.0.0
+        # resources:
+        #   limits:
+        #     memory: "128Mi"
+        #     cpu: "500m"
+        ports:
+        - containerPort: 8080
+        env:
+        - name: MONGO_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: database-user
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb
+              key: database-password
+        - name: MONGO_DATABASE
+          valueFrom: 
+            configMapKeyRef:
+              name: mongodb
+              key: database-name
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: employee
+spec:
+  selector:
+    app: employee
+  ports:
+  - port: 8082
+    targetPort: 8080
+    protocol: TCP
+    name: http
+
