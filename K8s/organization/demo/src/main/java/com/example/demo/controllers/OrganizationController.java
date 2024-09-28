@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -96,4 +97,14 @@ public class OrganizationController {
 
         return repository.save(entity);
     }
+
+    // @PostMapping("/{organizationId}/department")
+    // @PostMapping("/{organizationId}/department/{departmentId}/employee")
+
+    // @PutMapping("/{organizationId}/department/{departmenId}")
+    // @PutMapping("/{organizationId}/department/{departmentId}/employee/{employeeId}")
+
+    // @DeleteMapping("/{organizationId}/department/{departmenId}")
+    // @DeleteMapping("/{organizationId}/department/{departmentId}/employee/{employeeId}")
+    
 }
