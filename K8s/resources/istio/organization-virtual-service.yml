@@ -1,0 +1,42 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: organization
+spec:
+  hosts:
+  - 'humanresources.com'
+  - 'my.humanresources.com'
+  gateways:
+  - humanresources-gateway
+  http:
+  - match:
+    - uri:
+        prefix: /api/v1/organization
+    route:
+    - destination:
+        host: organization
+        subset: v1
+        port:
+          number: 8082
+      weight: 50
+    - destination:
+        host: organization
+        subset: v2
+        port:
+          number: 8082
+      weight: 50
+    rewrite:
+      uri: /
+    corsPolicy:
+      allowOrigins:
+        - prefix: "http://localhost:4200"
+        - prefix: "https://my.humanresources.com"
+      allowHeaders:
+        - "*"
+      allowMethods:
+        - "PUT"
+        - "POST"
+        - "GET"
+        - "DELETE"
+        - "OPTIONS"
+      allowCredentials: true
