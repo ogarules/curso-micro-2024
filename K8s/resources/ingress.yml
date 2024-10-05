@@ -12,21 +12,21 @@ spec:
   rules:
   - http:
       paths:
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: /api/employee/?(.*)
         backend:
           service:
             name: employee
             port: 
               number: 8082
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: /api/department/?(.*)
         backend:
           service:
             name: department
             port: 
               number: 8082
-      - pathType: Prefix
+      - pathType: ImplementationSpecific
         path: /api/organization/?(.*)
         backend: 
           service:
