@@ -19,3 +19,17 @@ spec:
             name: employee
             port: 
               number: 8082
+      - pathType: Prefix
+        path: /api/department/?(.*)
+        backend:
+          service:
+            name: department
+            port: 
+              number: 8082
+      - pathType: Prefix
+        path: /api/organization/?(.*)
+        backend: 
+          service:
+            name: organization
+            port:
+              number: 8082
