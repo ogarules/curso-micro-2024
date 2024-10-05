@@ -28,14 +28,14 @@ spec:
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 10
-          timeSeconds: 10
+          timeoutSeconds: 10
         livenessProbe:
           httpGet:
             path: /actuator/health/liveness
             port: 8080
           initialDelaySeconds: 60
           periodSeconds: 10
-          timeSeconds: 10
+          timeoutSeconds: 10
         ports:
         - containerPort: 8080
         env:
