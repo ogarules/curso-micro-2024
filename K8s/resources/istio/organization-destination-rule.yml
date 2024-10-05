@@ -1,6 +1,7 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
-metadata: organization-destination-rule
+metadata: 
+  name: organization-destination-rule
 spec:
   host: organization
   subsets:
